@@ -1,0 +1,20 @@
+import java.util.HashMap;
+import java.util.Map;
+class Solution {
+    public boolean isSubset(int a[], int b[]) {
+         if (b.length > a.length) return false;
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        for (int num : a) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+        for (int num : b) {
+            if (frequencyMap.getOrDefault(num, 0) > 0) {
+                frequencyMap.put(num, frequencyMap.get(num) - 1);
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+        
+    }
