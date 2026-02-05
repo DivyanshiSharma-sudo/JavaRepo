@@ -1,0 +1,29 @@
+class Solution {
+    public List<Integer> commonElements(List<Integer> arr, List<Integer> brr,
+                                        List<Integer> crr) {
+        int n1 = arr.size();
+        int n2 = brr.size();
+        int n3 = crr.size();
+        int i = 0, j = 0, k = 0;
+        List<Integer> res = new ArrayList<>();
+        int last = Integer.MIN_VALUE;
+        while (i < n1 && j < n2 && k < n3) {
+            if (arr.get(i).equals(brr.get(j)) && arr.get(i).equals(crr.get(k)) &&
+                !arr.get(i).equals(last)) {
+                res.add(arr.get(i));
+                last = arr.get(i);
+                i++;
+                j++;
+                k++;
+            } else if (Collections.min(Arrays.asList(arr.get(i), brr.get(j),
+                                                     crr.get(k))) == arr.get(i))
+                i++;
+            else if (Collections.min(Arrays.asList(arr.get(i), brr.get(j),
+                                                   crr.get(k))) == brr.get(j))
+                j++;
+            else
+                k++;
+        }
+        return res;
+    }
+}
