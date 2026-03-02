@@ -1,0 +1,14 @@
+class Solution {
+    public double findMedian(int[] arr) {
+        Arrays.sort(arr);
+        int n = arr.length;
+        if (n % 2 != 0) {
+            int middleIndex = n / 2;
+            return (double) arr[middleIndex];
+        } else {
+            int middleIndex1 = n / 2 - 1;
+            int middleIndex2 = n / 2;
+            return (double) (arr[middleIndex1] + arr[middleIndex2]) / 2.0;
+    }
+}
+}
