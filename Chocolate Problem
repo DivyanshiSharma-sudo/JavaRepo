@@ -1,0 +1,23 @@
+import java.util.Arrays;
+class Solution {
+    public int findMinDiff(ArrayList<Integer> arr, int m) {
+        int[] intArr = new int[arr.size()];
+        for(int i= 0; i< arr.size( ); i++){
+            intArr[i]= arr.get(i);
+        }
+        int n = intArr.length;
+        if (m == 0 || n == 0) return 0;
+        if (n < m) return -1;
+        Arrays.sort(intArr);
+        int minDiff = Integer.MAX_VALUE;
+        for (int i = 0; i + m - 1 < n; i++) {
+            int currentDiff = intArr[i + m - 1] - intArr[i];
+            if (currentDiff < minDiff) {
+                minDiff = currentDiff;
+            }
+        }
+
+        return minDiff;
+       
+    }
+}
