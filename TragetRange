@@ -1,0 +1,37 @@
+public class FindTargetRange {
+ public static int[] searchRange(int[] nums, int target) {
+        int[] result = {-1, -1};
+        if (nums == null || nums.length == 0) {
+            return result;
+        }
+        int firstPos = findBound(nums, target, true);
+        if (firstPos == -1) {
+            return result;
+        }
+        int lastPos = findBound(nums, target, false);
+        result[0] = firstPos;
+        result[1] = lastPos;
+        return result;
+    }
+private static int findBound(int[] nums, int target, boolean findFirst) {
+        int left = 0;
+        int right = nums.length - 1;
+        int index = -1;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] == target) {
+                index = mid;
+                if (findFirst) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return index;
+    }
+}
