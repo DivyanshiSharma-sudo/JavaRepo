@@ -1,0 +1,26 @@
+public class MatrixSum {
+  public static long[] findRectangularSums(int[][] a, int[][] query) {
+        if (a == null || a.length == 0 || a[0].length == 0) {
+            return new long[query.length];
+        }
+        int n = a.length;
+        int m = a[0].length;
+        long[][] prefixSum = new long[n + 1][m + 1];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                prefixSum[i + 1][j + 1] = a[i][j] + prefixSum[i][j + 1] + prefixSum[i + 1][j] - prefixSum[i][j];
+            }
+        }
+        long[] results = new long[query.length];
+        for (int k = 0; k < query.length; k++) {
+            int r1 = query[k][0];
+            int c1 = query[k][1];
+            int r2 = query[k][2];
+            int c2 = query[k][3];
+            results[k] = prefixSum[r2 + 1][c2 + 1] 
+                       - prefixSum[r1][c2 + 1] 
+                       - prefixSum[r2 + 1][c1] 
+                       + prefixSum[r1][c1];
+        }
+       return results;
+    }
